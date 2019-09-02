@@ -74,8 +74,6 @@ void RecorderCallback(SLAndroidSimpleBufferQueueItf bq, void *context) {
         recorder->SendQueueLoop(writeBuf,BUF_SIZE);
     }
 }
-
-
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_shen_opensles_MainActivity_startPlay(JNIEnv *env, jobject instance) {
@@ -86,7 +84,6 @@ Java_com_shen_opensles_MainActivity_startPlay(JNIEnv *env, jobject instance) {
     player->Start();
     player->SendQueueLoop("",1);    //开启轮询
 }
-
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_shen_opensles_MainActivity_stopPlay(JNIEnv *env, jobject instance) {
@@ -103,7 +100,7 @@ Java_com_shen_opensles_MainActivity_startRecord(JNIEnv *env, jobject instance) {
     recorder = new SLRecorder();
     recorder->SetQueueCallBack(RecorderCallback);
     recorder->Start();
-    recorder->SendQueueLoop(writeBuf,BUF_SIZE);
+    recorder->SendQueueLoop(writeBuf,BUF_SIZE); //因为开启轮询的方式依赖外部缓存，因此提供了一个函数让外部调用
 }
 extern "C"
 JNIEXPORT void JNICALL
@@ -114,14 +111,12 @@ Java_com_shen_opensles_MainActivity_stopRecord(JNIEnv *env, jobject instance) {
     delete recorder;
 }
 
-
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_shen_opensles_MainActivity_volume(JNIEnv *env, jobject instance, jint volue) {
     // TODO
 //    setVolue(volue);
 }
-
 
 //void setVolue(int volue){
 //    LOGE("SHEN:setVolue");

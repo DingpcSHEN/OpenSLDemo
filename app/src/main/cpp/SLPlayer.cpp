@@ -9,7 +9,7 @@ SLPlayer::SLPlayer() : SLBase(){
 
 }
 SLPlayer::~SLPlayer() {
-
+    ReleaseFeature();
 }
 
 bool SLPlayer::SetDataSource() {

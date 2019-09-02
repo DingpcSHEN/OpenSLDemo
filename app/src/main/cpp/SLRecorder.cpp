@@ -9,31 +9,8 @@ SLRecorder::SLRecorder() : SLBase(){
 
 }
 SLRecorder::~SLRecorder() {
-
+    ReleaseFeature();
 }
-
-static FILE *fp = nullptr;
-static const int RECORD_BUF_LENGTH = 1024*10;
-static char rbuf[RECORD_BUF_LENGTH];
-//void SLRecorder::CallbackBufferQueue(SLAndroidSimpleBufferQueueItf bufQueue, void *context) {
-//    if(isLooping) {
-//        if (fp == nullptr) {
-//            fp = fopen("/storage/emulated/0/SHEN_RES/record.pcm","wb+");  //华为
-//        }
-//        if (fp != nullptr) {
-//            int len = fwrite(rbuf,1,RECORD_BUF_LENGTH,fp);
-//            fflush(fp);
-//            (*bufQueue)->Enqueue(bufQueue,rbuf,RECORD_BUF_LENGTH);
-//        }
-//    } else {
-//        if (fp != nullptr) {
-//            fclose(fp);
-//            fp = nullptr;
-//        }
-//    }
-//}
-
-
 
 bool SLRecorder::SetDataSource() {
     static SLDataLocator_IODevice loc_dev = {SL_DATALOCATOR_IODEVICE,
